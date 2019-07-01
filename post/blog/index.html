@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>微信小程序历史搜索历史的本地缓存和删除 // My New Hugo Site</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://2038854562.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="微信小程序历史搜索历史的本地缓存和删除"/>
+<meta name="twitter:description" content="wxml：
+&lt;view class=&#39;search_history&#39; wx:if=&quot;{{isShow}}&quot;&gt; &lt;view class=&#39;history_title&#39;&gt;最近搜索&lt;/view&gt; &lt;view class=&#39;history_item&#39; wx:for=&quot;{{searchRecord}}&quot; wx:key=&quot;{{index}}&quot; wx:for-item=&quot;hisItem&quot;&gt; &lt;text bindtap=&#39;search_his&#39; data-his=&quot;{{hisItem}}&quot;&gt;{{hisItem}}&lt;/text&gt; &lt;/view&gt; &lt;view class=&#39;history_title clear&#39; bindtap=&#39;clear_search&#39;&gt;清空搜索历史&lt;/view&gt; &lt;/view&gt;  wxss:
+.search_history { height: auto; width: 95%; position: relative; background-color: #fff; border-radius: 5rpx; font-size: 30rpx; color: #000; text-align: left; } .history_title { color: #999; text-align: left; padding: 10rpx; } .history_item { display: inline-block; padding: 10rpx 15rpx; background-color: rgb(248, 246, 246); margin: 10rpx; border-radius: 10rpx; } .clear { display: inline-block; padding: 10rpx 15rpx; background-color: #66d7fa; color: #fff; margin: 10rpx; border-radius: 10rpx; }  js:"/>
+
+    <meta property="og:title" content="微信小程序历史搜索历史的本地缓存和删除" />
+<meta property="og:description" content="wxml：
+&lt;view class=&#39;search_history&#39; wx:if=&quot;{{isShow}}&quot;&gt; &lt;view class=&#39;history_title&#39;&gt;最近搜索&lt;/view&gt; &lt;view class=&#39;history_item&#39; wx:for=&quot;{{searchRecord}}&quot; wx:key=&quot;{{index}}&quot; wx:for-item=&quot;hisItem&quot;&gt; &lt;text bindtap=&#39;search_his&#39; data-his=&quot;{{hisItem}}&quot;&gt;{{hisItem}}&lt;/text&gt; &lt;/view&gt; &lt;view class=&#39;history_title clear&#39; bindtap=&#39;clear_search&#39;&gt;清空搜索历史&lt;/view&gt; &lt;/view&gt;  wxss:
+.search_history { height: auto; width: 95%; position: relative; background-color: #fff; border-radius: 5rpx; font-size: 30rpx; color: #000; text-align: left; } .history_title { color: #999; text-align: left; padding: 10rpx; } .history_item { display: inline-block; padding: 10rpx 15rpx; background-color: rgb(248, 246, 246); margin: 10rpx; border-radius: 10rpx; } .clear { display: inline-block; padding: 10rpx 15rpx; background-color: #66d7fa; color: #fff; margin: 10rpx; border-radius: 10rpx; }  js:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://2038854562.github.io/post/blog/" />
+<meta property="article:published_time" content="2019-07-01T10:26:53&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-01T10:26:53&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://2038854562.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>My New Hugo Site</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">微信小程序历史搜索历史的本地缓存和删除</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 1, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <p><strong>wxml：</strong></p>
+
+<pre><code>&lt;view class='search_history' wx:if=&quot;{{isShow}}&quot;&gt;
+        &lt;view class='history_title'&gt;最近搜索&lt;/view&gt;
+        &lt;view class='history_item' wx:for=&quot;{{searchRecord}}&quot; wx:key=&quot;{{index}}&quot; wx:for-item=&quot;hisItem&quot;&gt;
+          &lt;text bindtap='search_his' data-his=&quot;{{hisItem}}&quot;&gt;{{hisItem}}&lt;/text&gt;
+        &lt;/view&gt;
+        &lt;view class='history_title clear' bindtap='clear_search'&gt;清空搜索历史&lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+
+<p><strong>wxss:</strong></p>
+
+<pre><code>.search_history {
+  height: auto;
+  width: 95%;
+  position: relative;
+  background-color: #fff;
+  border-radius: 5rpx;
+  font-size: 30rpx;
+  color: #000;
+  text-align: left;
+}
+
+.history_title {
+  color: #999;
+  text-align: left;
+  padding: 10rpx;
+}
+
+.history_item {
+  display: inline-block;
+  padding: 10rpx 15rpx;
+  background-color: rgb(248, 246, 246);
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.clear {
+  display: inline-block;
+  padding: 10rpx 15rpx;
+  background-color: #66d7fa;
+  color: #fff;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+</code></pre>
+
+<p>js:</p>
+
+<pre><code>//js用到的全局变量
+Page({
+  data: {
+    isShow: false,
+    searchRecord: [],
+  },
+//搜索的时候缓存到本地
+
+  searchBox: function(e) {
+    let that = this;
+    let inputVal = e.detail.value.ip;
+    let searchRecord = this.data.searchRecord;
+    if (inputVal == &quot;&quot;) {
+      that.setData({
+        ip: inputVal
+      })
+      return
+    } else {
+      if (searchRecord.length &lt; 10) {
+        searchRecord.unshift(inputVal);
+      } else {
+        searchRecord.pop();
+        searchRecord.unshift(inputVal);
+      }
+      //将历史记录数组整体储存到缓存中
+      wx.setStorageSync('searchRecord', Array.from(new Set(searchRecord)));
+    }
+    that.setData({
+      ip: e.detail.value.ip
+    })
+  },
+  // 缓存历史
+  openHistorySearch: function() {
+    let that = this;
+    that.setData({
+      searchRecord: wx.getStorageSync('searchRecord') || [], //若无储存则为空
+    })
+    console.log(that.data.searchRecord);
+  },
+  // 清空搜索历史
+  clear_search: function() {
+    let that = this;
+    wx.clearStorageSync('searhRecord')
+    that.setData({
+      searchRecord: [],
+      isShow: false
+    })
+
+  },
+  // 点击历史搜索
+  search_his: function(e) {
+    let that = this;
+    let his = e.currentTarget.dataset.his;
+    that.setData({
+      ip: his,
+      isShow: false
+    });
+    that.search_host();
+  },
+
+})
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
